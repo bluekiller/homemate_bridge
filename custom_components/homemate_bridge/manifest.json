@@ -1,0 +1,11 @@
+{
+  "domain": "homemate_bridge",
+  "name": "Homemate Bridge",
+  "config_flow": true,
+  "requirements": ["hexdump","janus"],
+  "codeowners": [
+    "@bluekiller"
+  ],
+  "iot_class": "local_push",
+  "version": "1.0.0"
+}
