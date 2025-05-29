@@ -25,24 +25,24 @@ class HomemateEntity(Entity):
 
     def update_handler(self, handler: HomemateTCPHandler) -> None:
         if self.handler:
-            self.handler.remove_callback(self.async_write_ha_state)
+            self.handler.remove_callback(self.schedule_update_ha_state)
         self.handler = handler
-        self.handler.register_callback(self.async_write_ha_state)
+        self.handler.register_callback(self.schedule_update_ha_state)
 
     async def async_added_to_hass(self) -> None:
         """Run when this Entity has been added to HA."""
         # Importantly for a push integration, the module that will be getting updates
         # needs to notify HA of changes. The dummy device has a registercallback
-        # method, so to this we add the 'self.async_write_ha_state' method, to be
+        # method, so to this we add the 'self.schedule_update_ha_state' method, to be
         # called where ever there are changes.
         # The call back registration is done once this entity is registered with HA
         # (rather than in the __init__)
-        self.handler.register_callback(self.async_write_ha_state)
+        self.handler.register_callback(self.schedule_update_ha_state)
 
     async def async_will_remove_from_hass(self) -> None:
         """Entity being removed from hass."""
         # The opposite of async_added_to_hass. Remove any registered call backs here.
-        self.handler.remove_callback(self.async_write_ha_state)
+        self.handler.remove_callback(self.schedule_update_ha_state)
 
     # A unique_id for this entity with in this domain. This means for example if you
     # have a sensor on this cover, you must ensure the value returned is unique,
