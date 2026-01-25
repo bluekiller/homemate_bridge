@@ -6,9 +6,7 @@ from typing import Any
 # These constants are relevant to the type of entity we are using.
 # See below for how they are used.
 from homeassistant.components.cover import (
-    SUPPORT_CLOSE,
-    SUPPORT_OPEN,
-    SUPPORT_STOP,
+    CoverEntityFeature,
     CoverEntity,
 )
 from homeassistant.config_entries import ConfigEntry
@@ -51,7 +49,7 @@ class HomemateCover(HomemateEntity, CoverEntity):
     # imported above, we can tell HA the features that are supported by this entity.
     # If the supported features were dynamic (ie: different depending on the external
     # device it connected to), then this should be function with an @property decorator.
-    supported_features = SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_STOP
+    supported_features = CoverEntityFeature.OPEN | CoverEntityFeature.CLOSE | CoverEntityFeature.STOP
 
     # A unique_id for this entity with in this domain. This means for example if you
     # have a sensor on this cover, you must ensure the value returned is unique,
